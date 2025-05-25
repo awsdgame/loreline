@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chapters', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('story_id')->constrained('stories','id')->onDelete('cascade');
-            $table->string('title');
-            $table->integer('chapter_order')->default(1);
-            $table->timestamps();
-        });
+   Schema::create('chapters', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('story_id')->constrained()->onDelete('cascade');
+    $table->string('title');
+    $table->integer('order')->default(0);
+    $table->timestamps();
+});
+
     }
 
     /**

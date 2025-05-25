@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nodes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('chapter')->constrained('chapters','id')->onDelete('cascade');
-            $table->text('content');
-            $table->boolean('is_end')->default(false);
-            $table->timestamps();
-        });
+    $table->id();
+    $table->foreignId('chapter_id')->constrained()->onDelete('cascade');
+    $table->text('content');
+    $table->enum('type', ['normal', 'end'])->default('normal');
+    $table->timestamps();
+});
+
     }
 
     /**

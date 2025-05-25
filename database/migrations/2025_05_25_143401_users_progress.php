@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_progress', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users','id')->onDelete("cascade");
-            $table->foreignId('story_id')->constrained('stories','id')->onDelete("cascade");
-            $table->foreignId('node_id')->constrained('nodes','id')->onDelete('cascade');
-            $table->foreignId('choices_id')->nullable()->constrained('choices','id')->onDelete('set null');
-            $table->timestamps();
-        });
+        Schema::create('user_progress', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('story_id')->constrained()->onDelete('cascade');
+    $table->foreignId('current_node_id')->constrained('nodes')->onDelete('cascade');
+    $table->foreignId('last_choice_id')->nullable()->constrained('choices')->nullOnDelete();
+    $table->timestamps();
+});
+
     }
 
     /**

@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('choices', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('node_id')->constrained()->onDelete('cascade');
-            $table->string('label');
-            $table->foreignId('next_node_id')->constrained('nodes')->onDelete('cascade');
-            $table->boolean('key_choice')->default(false);
-            $table->timestamps();
-        });
+    $table->id();
+    $table->foreignId('from_node_id')->constrained('nodes')->onDelete('cascade');
+    $table->foreignId('to_node_id')->constrained('nodes')->onDelete('cascade');
+    $table->string('label');
+    $table->boolean('is_important')->default(false);
+    $table->timestamps();
+});
+
     }
 
     /**
